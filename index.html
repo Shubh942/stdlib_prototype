@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Using JavaScript Module in HTML</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style2.css" />
+  </head>
+  <body>
+    <!-- <label for="arrayInput">Enter Array (comma-separated):</label>
+    <input type="text" id="arrayInput" /> -->
+   
+    <!-- <div id="output"></div> -->
+    <h1 id="arrayview2iteratorright">arrayview2iteratorRight</h1>
+    <blockquote class="blockquote">
+      <p>
+        Create an iterator from an array-like object view, iterating from right
+        to left.
+      </p>
+    </blockquote>
+    <section class="intro"></section>
+    <p class="usage">
+      <h2 id="usage">Usage</h2>
+      <pre><code class="hljs language-javascript"><span class="hljs-keyword">var</span> arrayview2iteratorRight = <span class="hljs-built_in">require</span>( <span class="hljs-string">'@stdlib/array/to-view-iterator-right'</span> );
+      </code></pre>
+
+      <h4 id="arrayview2iteratorright-src-begin-end-mapfcn-thisarg-">
+        arrayview2iteratorRight( src[, begin[, end]][, mapFcn[, thisArg]] )
+      </h4>
+      <p class="return">
+        Returns an iterator which iterates from right to left over each element
+        in an array-like <code>object</code> view.
+      </p>
+       <button onclick="processArray()">Process Array</button>
+     <div class="conatin"><pre
+        class="pre1"
+      ><code class="language-javascript"><span class="hljs-keyword">var</span> it = arrayview2iteratorRight( [ <input type="text" id="arrayInput" value="1,2,3,4" /> ] );
+<span class="hljs-comment">// returns &#x3C;Object></span>
+<span class="hljs-keyword">var</span> v = it.next().value;
+<span class="hljs-comment">// returns 4</span>
+
+v = it.next().value;
+<span class="hljs-comment">// returns 3</span>
+
+v = it.next().value;
+<span class="hljs-comment">// returns 2</span>
+
+<span class="hljs-comment">// ...</span>
+</code></pre><pre class="pre1 output" id="output">11</pre></div> 
+      <p class="p2">
+        The returned iterator protocol-compliant object has the following
+        properties:
+      </p>
+      <ul>
+        <li class="l1">
+          <strong>next</strong>: function which returns an iterator
+          protocol-compliant object containing the next iterated value (if one
+          exists) assigned to a <code>value</code> property and a
+          <code>done</code> property having a <code>boolean</code> value
+          indicating whether the iterator is finished.
+        </li>
+        <li class="l1">
+          <strong>return</strong>: function which closes an iterator and returns
+          a single (optional) argument in an iterator protocol-compliant object.
+        </li>
+      </ul>
+      <p class="p4">
+        The <code>begin</code> and <code>end</code> arguments define the
+        starting (inclusive) and ending (non-inclusive) indices of the array
+        view. By default, the returned iterator starts iterating from the last
+        element in an array-like <code>object</code> (i.e., from the "end"). To
+        specify an alternative view end, provide an <code>end</code> argument
+        (non-inclusive).
+      </p>
+    </section>
+    <div class="foot"></div>
+
+    <!-- Include the bundled JavaScript file -->
+    <script src="bundled.js"></script>
+
+    <script>
+      // Define a function to process the array
+      function processArray() {
+        var inputArray = document
+          .getElementById("arrayInput")
+          .value.split(",")
+          .map(function (item) {
+            if (item.trim() === "") {
+              return undefined; // Convert empty elements to undefined
+            }
+            return parseFloat(item.trim()); // Parse elements to numbers
+          });
+          console.log(inputArray)
+
+        // Call the execute function from the bundled module and get the output
+        var output = execute(inputArray);
+        console.log(output);
+
+        var outputDiv = document.getElementById("output");
+        outputDiv.innerHTML = ""; // Clear previous output
+
+        // Display each value in the output array
+      output.forEach(function (value) {
+    outputDiv.innerHTML += "<div>" + value + "</div>"; // Append each value within a <div>
+});
+
+// Use CSS to style the <div> elements to display each value on a new line
+outputDiv.style.display = "flex";
+outputDiv.style.flexDirection = "column";    outputDiv.innerHTML += "<div>Done</div>"; // Indicate completion
+      }
+    </script>
+  </body>
+</html>
